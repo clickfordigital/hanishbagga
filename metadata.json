@@ -1,0 +1,6 @@
+{
+  "name": "Hanish Bagga Astrology",
+  "description": "Modern, premium, high-converting astrology website for Hanish Bagga featuring Vedic astrology consultations, courses, and interactive tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
