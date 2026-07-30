@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Calendar,
   Sparkles,
@@ -9,7 +9,11 @@ import {
   Home as HomeIcon,
   TrendingUp,
   Hash,
-  MessageCircle
+  MessageCircle,
+  Phone,
+  Send,
+  CheckCircle2,
+  User
 } from 'lucide-react';
 import { SERVICE_HIGHLIGHTS } from '../data/astrologyData';
 import portraitImg from '../assets/images/regenerated_image_1785403165903.png';
@@ -28,6 +32,16 @@ export const Hero: React.FC<HeroProps> = ({
   onNavigateCourses,
   onNavigateService
 }) => {
+  const [formName, setFormName] = useState('');
+  const [formPhone, setFormPhone] = useState('');
+  const [formCategory, setFormCategory] = useState('Career & Business');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleQuickSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formName.trim() || !formPhone.trim()) return;
+    setIsSubmitted(true);
+  };
   return (
     <section id="hero" className="relative bg-[#180a04] text-orange-50 overflow-hidden pt-6 pb-16 lg:pb-24 border-b border-orange-500/30">
       {/* Background Decorative Layer - Warm Orange & Rich Chocolate Brown */}
@@ -99,6 +113,84 @@ export const Hero: React.FC<HeroProps> = ({
               </a>
             </div>
 
+            {/* Quick Contact Form Card */}
+            <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-[#230e06]/90 border border-orange-500/35 backdrop-blur-md shadow-xl text-left max-w-xl mx-auto lg:mx-0">
+              <div className="flex items-center gap-2.5 mb-3">
+                <div className="w-8 h-8 rounded-xl bg-orange-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400 shrink-0">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-orange-200">
+                    Quick Astrological Callback
+                  </h3>
+                  <p className="text-[11px] text-amber-100/60">
+                    Get direct guidance from Hanish Bagga's office
+                  </p>
+                </div>
+              </div>
+
+              {isSubmitted ? (
+                <div className="p-3 bg-emerald-950/80 border border-emerald-500/50 rounded-xl text-xs text-emerald-300 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                    <div>
+                      <p className="font-bold">Inquiry Received!</p>
+                      <p className="text-[11px] text-emerald-200/80">Our team will call or WhatsApp you shortly.</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setFormName('');
+                      setFormPhone('');
+                    }}
+                    className="text-[10px] text-emerald-300 underline font-semibold hover:text-emerald-100 cursor-pointer"
+                  >
+                    Send Another
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleQuickSubmit} className="space-y-2.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <input
+                      type="text"
+                      required
+                      placeholder="Your Name *"
+                      value={formName}
+                      onChange={(e) => setFormName(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#140602] border border-orange-500/30 rounded-xl text-xs text-orange-50 placeholder-orange-300/40 focus:outline-none focus:border-orange-400"
+                    />
+                    <input
+                      type="tel"
+                      required
+                      placeholder="Phone / WhatsApp *"
+                      value={formPhone}
+                      onChange={(e) => setFormPhone(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#140602] border border-orange-500/30 rounded-xl text-xs text-orange-50 placeholder-orange-300/40 focus:outline-none focus:border-orange-400"
+                    />
+                    <select
+                      value={formCategory}
+                      onChange={(e) => setFormCategory(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#140602] border border-orange-500/30 rounded-xl text-xs text-orange-50 focus:outline-none focus:border-orange-400 cursor-pointer"
+                    >
+                      <option value="Career & Business">Career & Business</option>
+                      <option value="Love & Marriage">Love & Marriage</option>
+                      <option value="Health & Medical">Health & Medical</option>
+                      <option value="Financial & Wealth">Financial & Wealth</option>
+                      <option value="Astro-Vastu">Astro-Vastu</option>
+                      <option value="Numerology & Name">Numerology & Name</option>
+                    </select>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full py-2.5 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-orange-500/20 flex items-center justify-center gap-2 cursor-pointer"
+                  >
+                    <Send className="w-3.5 h-3.5 text-slate-950" />
+                    <span>Request Quick Callback</span>
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
 
           {/* Right Column: Hanish Bagga Portrait Card */}
