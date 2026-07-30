@@ -12,8 +12,10 @@ import {
   MessageCircle
 } from 'lucide-react';
 import { SERVICE_HIGHLIGHTS } from '../data/astrologyData';
+import portraitImg from '../assets/images/regenerated_image_1785403165903.png';
+import zodiacWheelImg from '../assets/images/golden_zodiac_wheel_1785401629394.jpg';
 
-const PORTRAIT_IMAGE = '/src/assets/images/regenerated_image_1785403165903.png';
+const PORTRAIT_IMAGE = portraitImg;
 
 interface HeroProps {
   onOpenBooking: (serviceCategory?: string) => void;
@@ -36,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({
       
       <div 
         className="absolute top-12 right-0 lg:right-12 w-[350px] sm:w-[500px] lg:w-[650px] h-[350px] sm:h-[500px] lg:h-[650px] opacity-25 pointer-events-none mix-blend-screen bg-contain bg-center bg-no-repeat animate-spin-slow"
-        style={{ backgroundImage: `url('/src/assets/images/golden_zodiac_wheel_1785401629394.jpg')` }}
+        style={{ backgroundImage: `url('${zodiacWheelImg}')` }}
       ></div>
 
       {/* Subtle Constellation Grid Effect */}
